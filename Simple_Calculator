@@ -1,0 +1,36 @@
+# Creating the functions for operators
+def add(n1,n2):
+    return n1+n2
+def sub(n1,n2):
+    return n1-n2
+def mul(n1,n2):
+    return n1*n2
+def div(n1,n2):
+    return n1/n2
+
+# adding opetrators to the dictionary
+operation = {"+":add,
+       "*":mul,
+       "-":sub,
+       "/":div
+      }
+# creating the calculator function
+def calculator():
+    num1 = int(input("enter the first number:"))
+    re = True
+    while re:
+        for symbol in operation:
+            print(symbol)
+        sy = input("pick a symbol")
+        num2 = int(input("enter the second number"))
+        ans = operation[sy](num1,num2)
+        print(f"{num1}{sy}{num2} = {ans}")
+        ask = input(f"enter 'Y' to continue with {ans} or type 'N' to stop:")
+        if ask == 'Y':
+            num1 = ans
+            print("\n"*5)
+        else:
+            re = False
+# Calling the function
+calculator()
+            
