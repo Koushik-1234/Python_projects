@@ -1,0 +1,113 @@
+import random 
+from abc import ABC, abstractmethod
+class Account:
+    ''' Abstract method decleration in this class '''
+    @abstractmethod
+    def CreateAccount():
+        pass
+        
+    @abstractmethod
+    def autonicate():
+        pass
+        
+    @abstractmethod
+    def Withdraw():
+        pass
+
+    @abstractmethod
+    def Deposit():
+        pass
+
+    @abstractmethod
+    def ShowBalance():
+        pass
+        
+class SavingAccount(Account):
+    ''' Creating the attributes and methods for the saving account '''
+    def __init__(self):
+        self.savingaccount = {}
+    #creating the Saving Account
+    def CreateAccount(self,name,MinDeposit):
+        self.AccountNum = random.randint(1000000,9999999)
+        self.savingaccount[self.AccountNum] = [name,MinDeposit]
+        print("----------------")
+        print(f"Your saving Account is created Successfully, Your Account Nummber is: {self.AccountNum}")
+        print("---------------")
+
+    # Validating the Account
+    def autonicate(self,AccountNum,name):
+        if AccountNum in self.savingaccount.keys():
+            if self.savingaccount[AccountNum][0] == name:
+                print("------------")
+                print("Authonicated successfully")
+                print("------------")
+                self.AccountNum = AccountNum
+                return True
+            else:
+                print("----------------")
+                print("Name doesnot match")
+                print("-----------------")
+                return False
+        else:
+            print("----------------")
+            print("invalid Account")
+            print("---------------")
+            return False
+
+    def Withdraw(self,WithdrawAmount):
+        if WithdrawAmount > self.savingaccount[self.AccountNum][1]:
+            Print("---------------")
+            print("insufishent fund")
+            print("---------------")
+        else:
+            self.savingaccount[self.AccountNum][1] -= WithdrawAmount
+            print("----------------")
+            print("Amount Withdrawn sucessfull")
+            print("------------------")
+    def Deposit(self,DepositAmount):
+        self.savingaccount[self.AccountNum][1] += DepositAmount
+        print("----------------")
+        print("Deposit Successfull")
+        print("-----------------")
+        SavingAccount.ShowBalance(self.AccountNum)
+    def ShowBalance(self,AccountNum):
+        print("---------------")
+        print(f"The Balance is:{self.savingaccount[self.AccountNum][1]}")
+        print("---------------")
+        
+            
+SavingAccount = SavingAccount()
+while True:
+    print(" Enter 1 to Create account\n Enter 2 to access Existin Account \n Enter 3 to Exit")
+    user_choice = int(input("Enter your choice"))
+    if user_choice == 1:
+        name = input("Enter your name")
+        MinDeposit = int(input("Enter the Minimum Deposit amount"))
+        SavingAccount.CreateAccount(name,MinDeposit)
+    elif user_choice == 2:
+        name = input("Enter the name")
+        AccountNum = int(input("Enter the account number"))
+        autonicateStatus=SavingAccount.autonicate(AccountNum,name)
+        if autonicateStatus is True:
+            while True:
+                print("Enter 1 To Deposit amount \n Enter 2 To withdraw amount \n Enter 3 To Show balance \n Enter 4 to Exit ")
+                UserChoice = int(input("Enter your choice"))
+                if UserChoice == 1:
+                    DepositAmount = int(input("Enter the amount to be Deposit"))
+                    SavingAccount.Deposit(DepositAmount)
+                elif UserChoice == 2:
+                    WithdrawAmount = int(input("Enter the Withdraw Amount"))
+                    SavingAccount.Withdraw(WithdrawAmount)
+                elif UserChoice == 3:
+                    SavingAccount.ShowBalance(AccountNum)
+                elif UserChoice == 4:
+                    break
+    elif user_choice == 3:
+            print("---------------")
+            print("Logedout of the system")
+            print("----------------")
+            break
+    else:
+        print("--------------")
+        print("invalid option")
+        print("---------------")
