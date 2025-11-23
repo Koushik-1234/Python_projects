@@ -1,0 +1,41 @@
+mkdir playwright-automation-framework
+cd playwright-automation-framework
+
+mkdir pages
+mkdir tests
+mkdir data
+mkdir screenshots
+mkdir allure-results
+
+
+cd pages
+type nul > __init__.py
+type nul > base_page.py
+type nul > login_page.py
+type nul > signup_page.py
+type nul > dashboard_page.py
+cd ..
+
+cd tests
+type nul > __init__.py
+type nul > test_login_valid.py
+type nul > test_login_invalid_password.py
+type nul > test_invalid_email_format.py
+type nul > test_login_new_email_navigates_signup.py
+type nul > test_signup_page.py
+cd ..
+
+cd data
+type nul > __init__.py
+type nul > login_test_data.py
+cd ..
+
+
+type nul > conftest.py
+type nul > pytest.ini
+type nul > requirements.txt
+type nul > README.md
+type nul > .gitignore
+
+
+
